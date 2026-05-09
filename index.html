@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nasza Strona</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --deep-navy: #012a4a;
+    --night-ocean: #013a63;
+    --dark-blue: #01497c;
+    --cobalt-sea: #014f86;
+    --south-lazur: #2a6f97;
+    --atlantic-blue: #2c7da0;
+    --morning-turquoise: #468faf;
+    --pearl-blue: #61a5c2;
+    --airy-blue: #89c2d9;
+    --sea-foam: #a9d6e5;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--deep-navy);
+    color: #e0e0e0;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* === HERO === */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, var(--deep-navy) 0%, var(--night-ocean) 50%, var(--dark-blue) 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 40px 24px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(97,165,194,0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 50%, rgba(137,194,217,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 100%, rgba(1,74,124,0.3) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .hero-content { position: relative; z-index: 1; }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--sea-foam);
+    margin-bottom: 24px;
+    opacity: 0.8;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    color: #fff;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+
+  .hero h1 .heart { color: #ff6b8a; }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--airy-blue);
+    max-width: 500px;
+    margin: 0 auto 40px;
+    font-weight: 300;
+  }
+
+  /* === COUNTER === */
+  .counter-section {
+    background: linear-gradient(135deg, var(--night-ocean), var(--dark-blue));
+    padding: 60px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .counter-section label {
+    display: block;
+    color: var(--sea-foam);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .date-input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .date-input-group input[type="date"] {
+    padding: 12px 20px;
+    border: 2px solid var(--atlantic-blue);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .date-input-group input[type="date"]:focus {
+    border-color: var(--sea-foam);
+    background: rgba(255,255,255,0.14);
+  }
+
+  .date-input-group input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+  }
+
+  .date-input-group button {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 12px;
+    background: var(--cobalt-sea);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .date-input-group button:hover {
+    background: var(--south-lazur);
+    transform: translateY(-2px);
+  }
+
+  .counter-display {
+    margin-top: 24px;
+    font-size: 1.2rem;
+    color: var(--airy-blue);
+  }
+
+  .counter-display .days-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #fff;
+    display: block;
+    line-height: 1.2;
+  }
+
+  .counter-display .days-label {
+    font-size: 0.95rem;
+    color: var(--sea-foam);
+  }
+
+  /* === SECTION GENERAL === */
+  section {
+    padding: 80px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .section-title {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: #fff;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .section-subtitle {
+    text-align: center;
+    font-style: italic;
+    color: var(--sea-foam);
+    font-size: 0.95rem;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  /* === PHOTOS === */
+  .photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+  }
+
+  .photo-card {
+    background: rgba(255,255,255,0.04);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .photo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .photo-card .photo-placeholder {
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--dark-blue), var(--morning-turquoise));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    opacity: 0.6;
+  }
+
+  .photo-card .photo-info {
+    padding: 16px 20px;
+  }
+
+  .photo-card .photo-info h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .photo-card .photo-info span {
+    font-size: 0.8rem;
+    color: var(--pearl-blue);
+  }
+
+  /* === MEMES === */
+  .memes-list { display: flex; flex-direction: column; gap: 32px; }
+
+  .meme-item {
+    background: rgba(255,255,255,0.03);
+    border-radius: 16px;
+    padding: 32px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.3s;
+  }
+
+  .meme-item:hover { background: rgba(255,255,255,0.06); }
+
+  .meme-item h3 { font-size: 1.2rem; color: #fff; margin-bottom: 8px; }
+
+  .meme-item .meme-icon { margin-right: 8px; }
+
+  .meme-item blockquote {
+    font-style: italic;
+    color: var(--airy-blue);
+    border-left: 3px solid var(--cobalt-sea);
+    padding-left: 20px;
+    font-size: 1.05rem;
+  }
+
+  /* === PLAYLIST === */
+  .spotify-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: #1DB954;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 auto 40px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    justify-content: center;
+    width: fit-content;
+  }
+
+  .spotify-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(29,185,84,0.3);
+  }
+
+  .table-wrap { overflow-x: auto; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  thead th {
+    background: rgba(255,255,255,0.06);
+    color: var(--sea-foam);
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--atlantic-blue);
+  }
+
+  thead th:first-child { border-radius: 12px 0 0 0; }
+  thead th:last-child { border-radius: 0 12px 0 0; }
+
+  tbody td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: #ccc;
+  }
+
+  tbody tr:hover td { background: rgba(255,255,255,0.04); }
+
+  /* === JOURNAL === */
+  .journal-entry {
+    background: rgba(255,255,255,0.03);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.3s;
+  }
+
+  .journal-entry:hover { background: rgba(255,255,255,0.06); }
+
+  .journal-entry h3 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .journal-entry .journal-meta {
+    font-size: 0.85rem;
+    color: var(--pearl-blue);
+    margin-bottom: 16px;
+  }
+
+  .journal-entry .journal-content {
+    color: #ccc;
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  /* === COLOR PALETTE === */
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+
+  .palette-swatch {
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+
+  .palette-swatch:hover { transform: translateY(-4px); }
+
+  .palette-swatch .color-hex {
+    font-family: monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .palette-swatch .color-name {
+    font-size: 0.75rem;
+    opacity: 0.8;
+  }
+
+  /* === FOOTER === */
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--pearl-blue);
+    font-size: 0.85rem;
+    font-weight: 300;
+  }
+
+  footer .footer-heart { color: #ff6b8a; }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in {
+    animation: fadeInUp 0.8s ease forwards;
+    opacity: 0;
+  }
+
+  .delay-1 { animation-delay: 0.2s; }
+  .delay-2 { animation-delay: 0.4s; }
+  .delay-3 { animation-delay: 0.6s; }
+
+  /* === WAVE DIVIDER === */
+  .wave-divider {
+    display: block;
+    width: 100%;
+    height: 60px;
+    fill: var(--night-ocean);
+    background: var(--deep-navy);
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 2.5rem; }
+    .counter-display .days-number { font-size: 2.8rem; }
+    .date-input-group input[type="date"] { width: 100%; }
+    .date-input-group button { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-subtitle animate-in">Coś pięknego zaczęło się w dniu,</p>
+    <h1 class="animate-in delay-1">kiedy po raz pierwszy<br>napisaliśmy do <span class="heart">&hearts;</span> siebie...</h1>
+    <p class="animate-in delay-2">Nasza mała przestrzeń w sieci, pełna wspomnień, śmiechu i chwil, które chcemy zapamiętać na zawsze.</p>
+  </div>
+</section>
+
+<!-- ===== COUNTER ===== -->
+<section class="counter-section" id="counter">
+  <div class="container">
+    <label for="startDate">Data pierwszej wiadomości</label>
+    <div class="date-input-group">
+      <input type="date" id="startDate">
+      <button onclick="updateCounter()">Oblicz</button>
+    </div>
+    <div class="counter-display" id="counterDisplay">
+      <span class="days-number" id="daysNumber">--</span>
+      <span class="days-label">dni razem od pierwszej wiadomości</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PHOTOS ===== -->
+<section id="photos">
+  <div class="container">
+    <h2 class="section-title animate-in">Nasze Wspólne Zdjęcia</h2>
+    <p class="section-subtitle">Każde zdjęcie to chwila, którą warto pamiętać.</p>
+    <div class="photos-grid" id="photosGrid">
+      <div class="photo-card">
+        <div class="photo-placeholder">&#x1F5BC;</div>
+        <div class="photo-info">
+          <h4>[Nazwa zdjęcia]</h4>
+          <span>[opis &middot; data]</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-placeholder">&#x1F5BC;</div>
+        <div class="photo-info">
+          <h4>[Nazwa zdjęcia]</h4>
+          <span>[opis &middot; data]</span>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-placeholder">&#x1F5BC;</div>
+        <div class="photo-info">
+          <h4>[Nazwa zdjęcia]</h4>
+          <span>[opis &middot; data]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEMES ===== -->
+<section id="memes">
+  <div class="container">
+    <h2 class="section-title animate-in">Nasze Memy &amp; Inside Jokes</h2>
+    <p class="section-subtitle">Tylko my to rozumiemy &mdash; i tak powinno zostać.</p>
+    <div class="memes-list">
+      <div class="meme-item">
+        <h3><span class="meme-icon">&#x1F420;</span> [Nazwa mema/żartu #1]</h3>
+        <blockquote>"[Podpis / kontekst żartu]"</blockquote>
+      </div>
+      <div class="meme-item">
+        <h3><span class="meme-icon">&#x1F30A;</span> [Nazwa mema/żartu #2]</h3>
+        <blockquote>"[Podpis / kontekst żartu]"</blockquote>
+      </div>
+      <div class="meme-item">
+        <h3><span class="meme-icon">&#x1F991;</span> [Nazwa mema/żartu #3]</h3>
+        <blockquote>"[Podpis / kontekst żartu]"</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PLAYLIST ===== -->
+<section id="playlist">
+  <div class="container">
+    <h2 class="section-title animate-in">Nasza Playlista</h2>
+    <p class="section-subtitle">Muzyka, która nam towarzyszy.</p>
+
+    <div style="text-align:center;">
+      <a class="spotify-link" href="#" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+        Słuchaj na Spotify
+      </a>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tytuł</th>
+            <th>Artysta</th>
+            <th>Dlaczego ją kochamy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>[tytuł]</td><td>[artysta]</td><td>[opis]</td></tr>
+          <tr><td>2</td><td>[tytuł]</td><td>[artysta]</td><td>[opis]</td></tr>
+          <tr><td>3</td><td>[tytuł]</td><td>[artysta]</td><td>[opis]</td></tr>
+          <tr><td>4</td><td>[tytuł]</td><td>[artysta]</td><td>[opis]</td></tr>
+          <tr><td>5</td><td>[tytuł]</td><td>[artysta]</td><td>[opis]</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== JOURNAL ===== -->
+<section id="journal">
+  <div class="container">
+    <h2 class="section-title animate-in">Nasz Dziennik</h2>
+    <p class="section-subtitle">Małe chwile, które zasługują na to, żeby o nich nie zapomnieć.</p>
+
+    <div class="journal-entry">
+      <h3>[Tytuł wpisu]</h3>
+      <div class="journal-meta">&#x1F4C5; DD.MM.RRRR &middot; Napisał(a): [imię]</div>
+      <div class="journal-content">(Tutaj opisz chwilę, wydarzenie, coś śmiesznego, coś wzruszającego &mdash; cokolwiek, co warto zapamiętać.)</div>
+    </div>
+
+    <div class="journal-entry">
+      <h3>[Tytuł wpisu]</h3>
+      <div class="journal-meta">&#x1F4C5; DD.MM.RRRR &middot; Napisał(a): [imię]</div>
+      <div class="journal-content">(Treść wpisu...)</div>
+    </div>
+
+    <div class="journal-entry">
+      <h3>[Tytuł wpisu]</h3>
+      <div class="journal-meta">&#x1F4C5; DD.MM.RRRR &middot; Napisał(a): [imię]</div>
+      <div class="journal-content">(Treść wpisu...)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COLOR PALETTE ===== -->
+<section id="palette">
+  <div class="container">
+    <h2 class="section-title animate-in">Paleta Kolorów Naszej Strony</h2>
+    <p class="section-subtitle">Ocean odcieni, tak jak nasze wiadomości o każdej porze dnia i nocy.</p>
+
+    <div class="palette-grid">
+      <div class="palette-swatch" style="background:#012a4a; color:#fff;"><span class="color-hex">#012a4a</span><span class="color-name">Granat Głębiny</span></div>
+      <div class="palette-swatch" style="background:#013a63; color:#fff;"><span class="color-hex">#013a63</span><span class="color-name">Nocny Ocean</span></div>
+      <div class="palette-swatch" style="background:#01497c; color:#fff;"><span class="color-hex">#01497c</span><span class="color-name">Ciemny Błękit</span></div>
+      <div class="palette-swatch" style="background:#014f86; color:#fff;"><span class="color-hex">#014f86</span><span class="color-name">Cobalt Morski</span></div>
+      <div class="palette-swatch" style="background:#2a6f97; color:#fff;"><span class="color-hex">#2a6f97</span><span class="color-name">Lazur Południa</span></div>
+      <div class="palette-swatch" style="background:#2c7da0; color:#fff;"><span class="color-hex">#2c7da0</span><span class="color-name">Błękit Atlantyku</span></div>
+      <div class="palette-swatch" style="background:#468faf; color:#fff;"><span class="color-hex">#468faf</span><span class="color-name">Turkus Poranny</span></div>
+      <div class="palette-swatch" style="background:#61a5c2; color:#012a4a;"><span class="color-hex">#61a5c2</span><span class="color-name">Perłowy Błękit</span></div>
+      <div class="palette-swatch" style="background:#89c2d9; color:#012a4a;"><span class="color-hex">#89c2d9</span><span class="color-name">Powietrzny Błękit</span></div>
+      <div class="palette-swatch" style="background:#a9d6e5; color:#012a4a;"><span class="color-hex">#a9d6e5</span><span class="color-name">Blask Morskiej Piany</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <p>Stworzone z <span class="footer-heart">&hearts;</span> dla Nas</p>
+    <p style="margin-top: 6px;">Strona ostatnio aktualizowana: <span id="updateDate"></span></p>
+  </div>
+</footer>
+
+<script>
+  function updateCounter() {
+    const input = document.getElementById('startDate');
+    const display = document.getElementById('daysNumber');
+    if (!input.value) { display.textContent = '--'; return; }
+    const start = new Date(input.value);
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    start.setHours(0,0,0,0);
+    const diff = Math.floor((today - start) / (1000 * 60 * 60 * 24));
+    display.textContent = diff >= 0 ? diff : '--';
+  }
+
+  document.getElementById('startDate').addEventListener('change', updateCounter);
+
+  document.getElementById('updateDate').textContent = new Date().toLocaleDateString('pl-PL', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.animate-in').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
