@@ -43,7 +43,6 @@
     padding: 0 24px;
   }
 
-  /* === HERO === */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -96,7 +95,6 @@
     font-weight: 300;
   }
 
-  /* === COUNTER === */
   .counter-section {
     background: linear-gradient(135deg, var(--night-ocean), var(--dark-blue));
     padding: 60px 24px;
@@ -182,7 +180,6 @@
     color: var(--sea-foam);
   }
 
-  /* === SECTION GENERAL === */
   section {
     padding: 80px 0;
     border-bottom: 1px solid rgba(255,255,255,0.04);
@@ -204,7 +201,6 @@
     font-weight: 300;
   }
 
-  /* === PHOTOS === */
   .photos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -234,9 +230,7 @@
     opacity: 0.6;
   }
 
-  .photo-card .photo-info {
-    padding: 16px 20px;
-  }
+  .photo-card .photo-info { padding: 16px 20px; }
 
   .photo-card .photo-info h4 {
     font-family: 'Inter', sans-serif;
@@ -250,7 +244,6 @@
     color: var(--pearl-blue);
   }
 
-  /* === MEMES === */
   .memes-list { display: flex; flex-direction: column; gap: 32px; }
 
   .meme-item {
@@ -275,7 +268,6 @@
     font-size: 1.05rem;
   }
 
-  /* === PLAYLIST === */
   .spotify-link {
     display: inline-flex;
     align-items: center;
@@ -329,7 +321,6 @@
 
   tbody tr:hover td { background: rgba(255,255,255,0.04); }
 
-  /* === JOURNAL === */
   .journal-entry {
     background: rgba(255,255,255,0.03);
     border-radius: 16px;
@@ -359,7 +350,6 @@
     line-height: 1.8;
   }
 
-  /* === COLOR PALETTE === */
   .palette-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -388,7 +378,28 @@
     opacity: 0.8;
   }
 
-  /* === FOOTER === */
+  [contenteditable] {
+    outline: none;
+    cursor: text;
+    border-radius: 6px;
+    transition: background 0.2s;
+    padding: 2px 4px;
+    margin: -2px -4px;
+  }
+
+  [contenteditable]:hover {
+    background: rgba(255,255,255,0.06);
+  }
+
+  [contenteditable]:focus {
+    background: rgba(255,255,255,0.08);
+    box-shadow: 0 0 0 2px var(--atlantic-blue);
+  }
+
+  tbody td[contenteditable]:focus {
+    background: rgba(255,255,255,0.1);
+  }
+
   footer {
     text-align: center;
     padding: 40px 24px;
@@ -399,7 +410,6 @@
 
   footer .footer-heart { color: #ff6b8a; }
 
-  /* === ANIMATIONS === */
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
@@ -414,16 +424,6 @@
   .delay-2 { animation-delay: 0.4s; }
   .delay-3 { animation-delay: 0.6s; }
 
-  /* === WAVE DIVIDER === */
-  .wave-divider {
-    display: block;
-    width: 100%;
-    height: 60px;
-    fill: var(--night-ocean);
-    background: var(--deep-navy);
-  }
-
-  /* Responsive */
   @media (max-width: 600px) {
     .hero h1 { font-size: 2.5rem; }
     .counter-display .days-number { font-size: 2.8rem; }
@@ -434,7 +434,6 @@
 </head>
 <body>
 
-<!-- ===== HERO ===== -->
 <section class="hero">
   <div class="hero-content">
     <p class="hero-subtitle animate-in">Coś pięknego zaczęło się w dniu,</p>
@@ -443,7 +442,6 @@
   </div>
 </section>
 
-<!-- ===== COUNTER ===== -->
 <section class="counter-section" id="counter">
   <div class="container">
     <label for="startDate">Data pierwszej wiadomości</label>
@@ -458,60 +456,57 @@
   </div>
 </section>
 
-<!-- ===== PHOTOS ===== -->
 <section id="photos">
   <div class="container">
     <h2 class="section-title animate-in">Nasze Wspólne Zdjęcia</h2>
     <p class="section-subtitle">Każde zdjęcie to chwila, którą warto pamiętać.</p>
-    <div class="photos-grid" id="photosGrid">
+    <div class="photos-grid">
       <div class="photo-card">
         <div class="photo-placeholder">&#x1F5BC;</div>
         <div class="photo-info">
-          <h4>[Nazwa zdjęcia]</h4>
-          <span>[opis &middot; data]</span>
+          <h4 contenteditable data-key="photo-1-title">[Nazwa zdjęcia]</h4>
+          <span contenteditable data-key="photo-1-desc">[opis &middot; data]</span>
         </div>
       </div>
       <div class="photo-card">
         <div class="photo-placeholder">&#x1F5BC;</div>
         <div class="photo-info">
-          <h4>[Nazwa zdjęcia]</h4>
-          <span>[opis &middot; data]</span>
+          <h4 contenteditable data-key="photo-2-title">[Nazwa zdjęcia]</h4>
+          <span contenteditable data-key="photo-2-desc">[opis &middot; data]</span>
         </div>
       </div>
       <div class="photo-card">
         <div class="photo-placeholder">&#x1F5BC;</div>
         <div class="photo-info">
-          <h4>[Nazwa zdjęcia]</h4>
-          <span>[opis &middot; data]</span>
+          <h4 contenteditable data-key="photo-3-title">[Nazwa zdjęcia]</h4>
+          <span contenteditable data-key="photo-3-desc">[opis &middot; data]</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== MEMES ===== -->
 <section id="memes">
   <div class="container">
     <h2 class="section-title animate-in">Nasze Memy &amp; Inside Jokes</h2>
     <p class="section-subtitle">Tylko my to rozumiemy &mdash; i tak powinno zostać.</p>
     <div class="memes-list">
       <div class="meme-item">
-        <h3><span class="meme-icon">&#x1F420;</span> [Nazwa mema/żartu #1]</h3>
-        <blockquote>"[Podpis / kontekst żartu]"</blockquote>
+        <h3><span class="meme-icon">&#x1F420;</span> <span contenteditable data-key="meme-1-title">[Nazwa mema/żartu #1]</span></h3>
+        <blockquote contenteditable data-key="meme-1-quote">"[Podpis / kontekst żartu]"</blockquote>
       </div>
       <div class="meme-item">
-        <h3><span class="meme-icon">&#x1F30A;</span> [Nazwa mema/żartu #2]</h3>
-        <blockquote>"[Podpis / kontekst żartu]"</blockquote>
+        <h3><span class="meme-icon">&#x1F30A;</span> <span contenteditable data-key="meme-2-title">[Nazwa mema/żartu #2]</span></h3>
+        <blockquote contenteditable data-key="meme-2-quote">"[Podpis / kontekst żartu]"</blockquote>
       </div>
       <div class="meme-item">
-        <h3><span class="meme-icon">&#x1F991;</span> [Nazwa mema/żartu #3]</h3>
-        <blockquote>"[Podpis / kontekst żartu]"</blockquote>
+        <h3><span class="meme-icon">&#x1F991;</span> <span contenteditable data-key="meme-3-title">[Nazwa mema/żartu #3]</span></h3>
+        <blockquote contenteditable data-key="meme-3-quote">"[Podpis / kontekst żartu]"</blockquote>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== PLAYLIST ===== -->
 <section id="playlist">
   <div class="container">
     <h2 class="section-title animate-in">Nasza Playlista</h2>
@@ -520,8 +515,11 @@
     <div style="text-align:center;">
       <a class="spotify-link" href="#" target="_blank">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        Słuchaj na Spotify
+        <span contenteditable data-key="spotify-text">Słuchaj na Spotify</span>
       </a>
+      <div style="margin-top:8px;">
+        <input type="url" id="spotifyUrl" placeholder="https://open.spotify.com/playlist/..." style="padding:10px 16px;border:2px solid var(--atlantic-blue);border-radius:10px;background:rgba(255,255,255,0.08);color:#fff;font-size:0.85rem;font-family:'Inter',sans-serif;outline:none;width:100%;max-width:400px;transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--sea-foam)'" onblur="this.style.borderColor='var(--atlantic-blue)'">
+      </div>
     </div>
 
     <div class="table-wrap">
@@ -535,44 +533,42 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>1</td><td>[tytuł]</td><td>[artysta]</td><td>[opis]</td></tr>
-          <tr><td>2</td><td>[tytuł]</td><td>[artysta]</td><td>[opis]</td></tr>
-          <tr><td>3</td><td>[tytuł]</td><td>[artysta]</td><td>[opis]</td></tr>
-          <tr><td>4</td><td>[tytuł]</td><td>[artysta]</td><td>[opis]</td></tr>
-          <tr><td>5</td><td>[tytuł]</td><td>[artysta]</td><td>[opis]</td></tr>
+          <tr><td>1</td><td contenteditable data-key="song-1-title">[tytuł]</td><td contenteditable data-key="song-1-artist">[artysta]</td><td contenteditable data-key="song-1-reason">[opis]</td></tr>
+          <tr><td>2</td><td contenteditable data-key="song-2-title">[tytuł]</td><td contenteditable data-key="song-2-artist">[artysta]</td><td contenteditable data-key="song-2-reason">[opis]</td></tr>
+          <tr><td>3</td><td contenteditable data-key="song-3-title">[tytuł]</td><td contenteditable data-key="song-3-artist">[artysta]</td><td contenteditable data-key="song-3-reason">[opis]</td></tr>
+          <tr><td>4</td><td contenteditable data-key="song-4-title">[tytuł]</td><td contenteditable data-key="song-4-artist">[artysta]</td><td contenteditable data-key="song-4-reason">[opis]</td></tr>
+          <tr><td>5</td><td contenteditable data-key="song-5-title">[tytuł]</td><td contenteditable data-key="song-5-artist">[artysta]</td><td contenteditable data-key="song-5-reason">[opis]</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<!-- ===== JOURNAL ===== -->
 <section id="journal">
   <div class="container">
     <h2 class="section-title animate-in">Nasz Dziennik</h2>
     <p class="section-subtitle">Małe chwile, które zasługują na to, żeby o nich nie zapomnieć.</p>
 
     <div class="journal-entry">
-      <h3>[Tytuł wpisu]</h3>
-      <div class="journal-meta">&#x1F4C5; DD.MM.RRRR &middot; Napisał(a): [imię]</div>
-      <div class="journal-content">(Tutaj opisz chwilę, wydarzenie, coś śmiesznego, coś wzruszającego &mdash; cokolwiek, co warto zapamiętać.)</div>
+      <h3 contenteditable data-key="journal-1-title">[Tytuł wpisu]</h3>
+      <div class="journal-meta" contenteditable data-key="journal-1-meta">&#x1F4C5; DD.MM.RRRR &middot; Napisał(a): [imię]</div>
+      <div class="journal-content" contenteditable data-key="journal-1-content">(Tutaj opisz chwilę, wydarzenie, coś śmiesznego, coś wzruszającego &mdash; cokolwiek, co warto zapamiętać.)</div>
     </div>
 
     <div class="journal-entry">
-      <h3>[Tytuł wpisu]</h3>
-      <div class="journal-meta">&#x1F4C5; DD.MM.RRRR &middot; Napisał(a): [imię]</div>
-      <div class="journal-content">(Treść wpisu...)</div>
+      <h3 contenteditable data-key="journal-2-title">[Tytuł wpisu]</h3>
+      <div class="journal-meta" contenteditable data-key="journal-2-meta">&#x1F4C5; DD.MM.RRRR &middot; Napisał(a): [imię]</div>
+      <div class="journal-content" contenteditable data-key="journal-2-content">(Treść wpisu...)</div>
     </div>
 
     <div class="journal-entry">
-      <h3>[Tytuł wpisu]</h3>
-      <div class="journal-meta">&#x1F4C5; DD.MM.RRRR &middot; Napisał(a): [imię]</div>
-      <div class="journal-content">(Treść wpisu...)</div>
+      <h3 contenteditable data-key="journal-3-title">[Tytuł wpisu]</h3>
+      <div class="journal-meta" contenteditable data-key="journal-3-meta">&#x1F4C5; DD.MM.RRRR &middot; Napisał(a): [imię]</div>
+      <div class="journal-content" contenteditable data-key="journal-3-content">(Treść wpisu...)</div>
     </div>
   </div>
 </section>
 
-<!-- ===== COLOR PALETTE ===== -->
 <section id="palette">
   <div class="container">
     <h2 class="section-title animate-in">Paleta Kolorów Naszej Strony</h2>
@@ -593,7 +589,6 @@
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
 <footer>
   <div class="container">
     <p>Stworzone z <span class="footer-heart">&hearts;</span> dla Nas</p>
@@ -602,6 +597,54 @@
 </footer>
 
 <script>
+  const STORAGE_PREFIX = 'ns_';
+
+  function saveContent(key, value) {
+    localStorage.setItem(STORAGE_PREFIX + key, value);
+  }
+
+  function loadContent(key) {
+    return localStorage.getItem(STORAGE_PREFIX + key);
+  }
+
+  function saveAll() {
+    document.querySelectorAll('[contenteditable][data-key]').forEach(el => {
+      saveContent(el.dataset.key, el.innerHTML);
+    });
+    const spotifyInput = document.getElementById('spotifyUrl');
+    if (spotifyInput) {
+      saveContent('spotify-url', spotifyInput.value);
+      const link = spotifyInput.closest('div').querySelector('.spotify-link');
+      if (link) link.href = spotifyInput.value || '#';
+    }
+  }
+
+  function loadAll() {
+    document.querySelectorAll('[contenteditable][data-key]').forEach(el => {
+      const saved = loadContent(el.dataset.key);
+      if (saved !== null) el.innerHTML = saved;
+    });
+    const spotifyInput = document.getElementById('spotifyUrl');
+    const saved = loadContent('spotify-url');
+    if (spotifyInput && saved !== null) {
+      spotifyInput.value = saved;
+      const link = spotifyInput.closest('div').querySelector('.spotify-link');
+      if (link) link.href = saved || '#';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadAll();
+    document.querySelectorAll('[contenteditable][data-key]').forEach(el => {
+      el.addEventListener('blur', saveAll);
+    });
+    const spotifyInput = document.getElementById('spotifyUrl');
+    if (spotifyInput) {
+      spotifyInput.addEventListener('blur', saveAll);
+      spotifyInput.addEventListener('change', saveAll);
+    }
+  });
+
   function updateCounter() {
     const input = document.getElementById('startDate');
     const display = document.getElementById('daysNumber');
@@ -612,11 +655,11 @@
     start.setHours(0,0,0,0);
     const diff = Math.floor((today - start) / (1000 * 60 * 60 * 24));
     display.textContent = diff >= 0 ? diff : '--';
-    localStorage.setItem('startDate', input.value);
+    localStorage.setItem(STORAGE_PREFIX + 'startDate', input.value);
   }
 
   const startInput = document.getElementById('startDate');
-  const saved = localStorage.getItem('startDate');
+  const saved = localStorage.getItem(STORAGE_PREFIX + 'startDate');
   if (saved) {
     startInput.value = saved;
     updateCounter();
