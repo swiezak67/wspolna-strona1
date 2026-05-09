@@ -612,15 +612,22 @@
     start.setHours(0,0,0,0);
     const diff = Math.floor((today - start) / (1000 * 60 * 60 * 24));
     display.textContent = diff >= 0 ? diff : '--';
+    localStorage.setItem('startDate', input.value);
   }
 
-  document.getElementById('startDate').addEventListener('change', updateCounter);
+  const startInput = document.getElementById('startDate');
+  const saved = localStorage.getItem('startDate');
+  if (saved) {
+    startInput.value = saved;
+    updateCounter();
+  }
+
+  startInput.addEventListener('change', updateCounter);
 
   document.getElementById('updateDate').textContent = new Date().toLocaleDateString('pl-PL', {
     year: 'numeric', month: 'long', day: 'numeric'
   });
 
-  // Intersection Observer for scroll animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
